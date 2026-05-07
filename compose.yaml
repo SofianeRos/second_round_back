@@ -1,0 +1,15 @@
+services:
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: second_round
+    ports:
+      # Expose le port 3306 de Docker vers ton ordinateur
+      - "3306:3306"
+    volumes:
+      # Permet de ne pas perdre tes données si tu éteins Docker
+      - database_data:/var/lib/mysql
+
+volumes:
+  database_data:

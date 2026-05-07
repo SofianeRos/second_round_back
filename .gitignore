@@ -1,0 +1,36 @@
+### --- SYMFONY ---
+/vendor/
+/var/
+/public/bundles/
+/public/storage/
+/config/jwt/*.pem
+/config/jwt/*.key
+
+### --- DOCKER ---
+.docker/
+# On garde compose.yaml pour que tes profs puissent lancer le projet
+!compose.yaml
+!compose.override.yaml
+
+### --- IDE & SYSTEM ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+### --- COMPOSER ---
+composer.phar
+/vendor/
+
+### --- PHPUNIT ---
+/phpunit.xml
+/.phpunit.result.cache
+
+### --- ENVIRONNEMENT ---
+# Exceptionnellement, on ne bloque pas le .env pour tes professeurs
+# .env
+.env.local
+.env.dev.local
+.env.test.local
+.env.prod.local
