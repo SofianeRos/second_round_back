@@ -37,7 +37,11 @@ security:
     access_control:
         # On autorise tout le monde à tenter de se connecter
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-
-        # NOTE : Pour l'instant on ne bloque pas le reste de l'API pour te laisser
-        # accéder à la page API Platform. On bloquera les routes plus tard !
-        # - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        # On autorise tout le monde à lire l'API (GET)
+        - { path: ^/api, methods: [GET], roles: PUBLIC_ACCESS }
+        # Seuls les utilisateurs authentifiés peuvent créer, modifier ou supprimer
+        - {
+              path: ^/api,
+              methods: [POST, PUT, PATCH, DELETE],
+              roles: IS_AUTHENTICATED_FULLY,
+          }

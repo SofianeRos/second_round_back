@@ -6,24 +6,32 @@ use ApiPlatform\Metadata\ApiResource;
 
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']]
+)]
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 class Photo
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read', 'write'])]
     private ?string $nomFichier = null;
 
     #[ORM\Column]
+    #[Groups(['read', 'write'])]
     private ?bool $estPrincipale = null;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read', 'write'])]
     private ?Article $article = null;
 
     public function getId(): ?int

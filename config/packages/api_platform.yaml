@@ -1,7 +1,13 @@
 api_platform:
-    title: Hello API Platform
+    title: Second Round API
     version: 1.0.0
     defaults:
         stateless: true
         cache_headers:
-            vary: ['Content-Type', 'Authorization', 'Origin']
+            vary: ["Content-Type", "Authorization", "Origin"]
+        pagination:
+            partial: true
+            client_items_per_page: true
+    eager_loading:
+        max_joins: 3
+        force_eager: false

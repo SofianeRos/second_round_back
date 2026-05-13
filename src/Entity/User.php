@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,44 +13,61 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Attribute\Groups;
 
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    paginationItemsPerPage: 20,
+)]
+#[ApiFilter(SearchFilter::class, properties: ['pseudo' => 'partial', 'email' => 'exact', 'niveau' => 'exact', 'typeBoxe' => 'exact'])]
+#[ApiFilter(OrderFilter::class, properties: ['dateInscription' => 'DESC'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['read', 'write'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['write'])]
     private ?string $password = null;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $pseudo = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read'])]
     private ?int $tailleCm = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read'])]
     private ?int $poidsKg = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read'])]
     private ?string $niveau = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read'])]
     private ?string $typeBoxe = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Groups(['read'])]
     private ?string $budgetMax = null;
 
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?\DateTime $dateInscription = null;
 
     /**
