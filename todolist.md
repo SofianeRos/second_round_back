@@ -16,23 +16,23 @@
     - [x] GET public, POST/PUT/PATCH/DELETE authentifiés
     - [x] Configuration `access_control` en place
 
-## 🔵 Phase 3 : Pagination, Filtres & Améliorations
+## ✅ Phase 3 : Pagination, Filtres & Améliorations
 
-- [ ] **Pagination API** :
-    - [ ] Configurer `itemsPerPage` par défaut (ex: 20 articles par page)
-    - [ ] Tester `/api/articles?page=1`
-- [ ] **Filtres de recherche** :
-    - [ ] Filtre par prix (min/max)
-    - [ ] Filtre par catégorie
-    - [ ] Filtre par statut
-    - [ ] Filtre par vendeur
-    - [ ] Recherche texte sur la description/marque
-- [ ] **Tri** :
-    - [ ] Tri par prix (croissant/décroissant)
-    - [ ] Tri par date de publication
-- [ ] **Contrôles d'accès avancés** :
-    - [ ] Voter : seul le vendeur peut modifier son article
-    - [ ] Voter : seul le vendeur peut le supprimer
+- [x] **Pagination API** :
+    - [x] Configurer `itemsPerPage` par défaut (ex: 20 articles par page)
+    - [x] Tester `/api/articles?page=1`
+- [x] **Filtres de recherche** :
+    - [x] Filtre par prix (min/max)
+    - [x] Filtre par catégorie
+    - [x] Filtre par statut
+    - [x] Filtre par vendeur
+    - [x] Recherche texte sur la description/marque
+- [x] **Tri** :
+    - [x] Tri par prix (croissant/décroissant)
+    - [x] Tri par date de publication
+- [x] **Contrôles d'accès avancés** :
+    - [x] Voter : seul le vendeur peut modifier son article
+    - [x] Voter : seul le vendeur peut le supprimer
 
 ## 🟢 Phase 4 : Upload d'images & Assets
 
