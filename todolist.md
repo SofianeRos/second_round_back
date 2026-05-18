@@ -36,10 +36,10 @@
 
 ## 🟢 Phase 4 : Upload d'images & Assets
 
-- [ ] **Gestion des photos** :
-    - [ ] Installer `VichUploaderBundle`
-    - [ ] Configurer le stockage des fichiers
-    - [ ] Route pour uploader une photo sur un article
+- [x] **Gestion des photos** :
+    - [x] Installer `VichUploaderBundle`
+    - [x] Configurer le stockage des fichiers
+    - [x] Route pour uploader une photo sur un article
 - [ ] **Thumbnails** :
     - [ ] Génération automatique de vignettes
     - [ ] Compression d'images
