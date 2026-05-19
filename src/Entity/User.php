@@ -86,7 +86,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Messagerie>
      */
     #[ORM\OneToMany(targetEntity: Messagerie::class, mappedBy: 'expediteur')]
-    private Collection $messageries;
+    private Collection $messagesEnvoyes;
+
+    /**
+     * @var Collection<int, Messagerie>
+     */
+    #[ORM\OneToMany(targetEntity: Messagerie::class, mappedBy: 'destinataire')]
+    private Collection $messagesRecus;
 
     /**
      * @var Collection<int, Commande>
@@ -110,7 +116,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->articles = new ArrayCollection();
         $this->favoris = new ArrayCollection();
-        $this->messageries = new ArrayCollection();
+        $this->messagesEnvoyes = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
         $this->commandes = new ArrayCollection();
         $this->commentaireArticles = new ArrayCollection();
         $this->evaluations = new ArrayCollection();
@@ -268,27 +275,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Messagerie>
      */
-    public function getMessageries(): Collection
+    public function getMessagesEnvoyes(): Collection
     {
-        return $this->messageries;
+        return $this->messagesEnvoyes;
     }
 
-    public function addMessagery(Messagerie $messagery): static
+    public function addMessageEnvoye(Messagerie $messagery): static
     {
-        if (!$this->messageries->contains($messagery)) {
-            $this->messageries->add($messagery);
+        if (!$this->messagesEnvoyes->contains($messagery)) {
+            $this->messagesEnvoyes->add($messagery);
             $messagery->setExpediteur($this);
         }
 
         return $this;
     }
 
-    public function removeMessagery(Messagerie $messagery): static
+    public function removeMessageEnvoye(Messagerie $messagery): static
     {
-        if ($this->messageries->removeElement($messagery)) {
+        if ($this->messagesEnvoyes->removeElement($messagery)) {
             // set the owning side to null (unless already changed)
             if ($messagery->getExpediteur() === $this) {
                 $messagery->setExpediteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Messagerie>
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessageRecu(Messagerie $messagery): static
+    {
+        if (!$this->messagesRecus->contains($messagery)) {
+            $this->messagesRecus->add($messagery);
+            $messagery->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessageRecu(Messagerie $messagery): static
+    {
+        if ($this->messagesRecus->removeElement($messagery)) {
+            // set the owning side to null (unless already changed)
+            if ($messagery->getDestinataire() === $this) {
+                $messagery->setDestinataire(null);
             }
         }
 

@@ -46,8 +46,8 @@
 
 ## 🟡 Phase 5 : Messagerie & Offres
 
-- [ ] **Endpoint POST pour envoyer un message**
-- [ ] **Endpoint pour faire une offre de prix**
+- [x] **Endpoint POST pour envoyer un message**
+- [x] **Endpoint pour faire une offre de prix**
 - [ ] **Notifications (futur)**
 
 ## 🟣 Phase 6 : Frontend React
