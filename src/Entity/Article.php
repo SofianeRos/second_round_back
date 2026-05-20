@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
@@ -25,6 +28,9 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ApiFilter(SearchFilter::class, properties: ['categorie' => 'exact', 'marque' => 'partial', 'description' => 'partial', 'statut.id' => 'exact', 'vendeur.id' => 'exact'])]
 #[ApiFilter(RangeFilter::class, properties: ['prix'])]
 #[ApiFilter(OrderFilter::class, properties: ['prix' => 'ASC', 'datePublication' => 'DESC'])]
+#[Get()]
+#[GetCollection()]
+#[Post(security: "is_granted('ROLE_USER')")]
 #[Patch(security: "is_granted('edit', object)")]
 #[Delete(security: "is_granted('delete', object)")]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
