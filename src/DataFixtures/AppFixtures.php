@@ -82,6 +82,20 @@ class AppFixtures extends Fixture
         $manager->persist($test);
         $users['test'] = $test;
 
+        // Utilisateur Admin (pour les tests)
+        $admin = new User();
+        $admin->setEmail('admin@boxe.fr');
+        $admin->setPseudo('AdminBoxe');
+        $admin->setTailleCm(178);
+        $admin->setPoidsKg(72);
+        $admin->setNiveau('Compétition');
+        $admin->setTypeBoxe('Boxe Anglaise');
+        $admin->setDateInscription(new \DateTime());
+        $admin->setPassword($this->hasher->hashPassword($admin, 'admin123'));
+        $admin->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+        $manager->persist($admin);
+        $users['admin'] = $admin;
+
         // ====== ARTICLES ======
         // Article 1 : Gants Venum (vendus par Sarah)
         $article1 = new Article();
