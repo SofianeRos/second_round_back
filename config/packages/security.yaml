@@ -37,6 +37,8 @@ security:
     access_control:
         # On autorise tout le monde à tenter de se connecter
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        # On autorise tout le monde à s'inscrire
+        - { path: ^/api/register, roles: PUBLIC_ACCESS }
         # On autorise tout le monde à lire l'API (GET)
         - { path: ^/api, methods: [GET], roles: PUBLIC_ACCESS }
         # Seuls les utilisateurs authentifiés peuvent créer, modifier ou supprimer
