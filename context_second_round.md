@@ -49,4 +49,3 @@ Pour faciliter la vie des débutants (et répondre au persona pressé), l'applic
 Ce document sert de référentiel métier. Lors de la génération de code (front ou back) :
 - Adaptez le vocabulaire (utilisez "Vestiaire" pour le profil, "Round" pour les étapes).
 - Prenez en compte que les recommandations d'articles doivent pouvoir se baser sur le poids/taille de l'utilisateur.
-- Gardez à l'esprit la notion de "Packs" qui liera potentiellement plusieurs `Articles` à une seule `Commande` ou logique front-end.
