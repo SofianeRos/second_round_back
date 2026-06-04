@@ -40,7 +40,7 @@ security:
         # On autorise tout le monde à s'inscrire
         - { path: ^/api/register, roles: PUBLIC_ACCESS }
         # On exige une authentification pour /api/me
-        - { path: ^/api/me, methods: [GET], roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
         # On autorise tout le monde à lire l'API (GET)
         - { path: ^/api, methods: [GET], roles: PUBLIC_ACCESS }
         # Seuls les utilisateurs authentifiés peuvent créer, modifier ou supprimer

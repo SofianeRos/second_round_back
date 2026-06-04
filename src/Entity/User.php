@@ -43,28 +43,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\Column(length: 255)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $pseudo = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?int $tailleCm = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?int $poidsKg = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $niveau = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $typeBoxe = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $budgetMax = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read', 'write'])]
+    private ?string $photoProfil = null;
 
     #[ORM\Column]
     #[Groups(['read'])]
@@ -471,6 +475,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!in_array($role, $this->roles)) {
             $this->roles[] = $role;
         }
+
+        return $this;
+    }
+
+    public function getPhotoProfil(): ?string
+    {
+        return $this->photoProfil;
+    }
+
+    public function setPhotoProfil(?string $photoProfil): static
+    {
+        $this->photoProfil = $photoProfil;
 
         return $this;
     }
