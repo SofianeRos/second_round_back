@@ -84,6 +84,7 @@ class Article
      * @var Collection<int, Photo>
      */
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'article')]
+    #[Groups(['read'])]
     private Collection $photos;
 
     /**
