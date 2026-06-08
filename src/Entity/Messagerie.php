@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -23,6 +24,10 @@ use Symfony\Component\Serializer\Attribute\Groups;
             security: "is_granted('ROLE_USER')",
             processor: MessagerieProcessor::class,
             denormalizationContext: ['groups' => ['write']],
+        ),
+        new Patch(
+            security: "is_granted('ROLE_USER') and object.getDestinataire() == user",
+            denormalizationContext: ['groups' => ['patch']],
         ),
     ],
     normalizationContext: ['groups' => ['read']],
@@ -52,7 +57,7 @@ class Messagerie
     private ?string $montantOffre = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'patch'])]
     private ?string $statutOffre = null;
 
     #[ORM\Column]

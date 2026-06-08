@@ -1,6 +1,16 @@
 api_platform:
     title: Second Round API
     version: 1.0.0
+    formats:
+        jsonld:
+            mime_types: ['application/ld+json']
+        json:
+            mime_types: ['application/json']
+    patch_formats:
+        json:
+            mime_types: ['application/merge-patch+json', 'application/json']
+        jsonld:
+            mime_types: ['application/merge-patch+json']
     defaults:
         stateless: true
         cache_headers:
