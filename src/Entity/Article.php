@@ -30,7 +30,10 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ApiFilter(OrderFilter::class, properties: ['prix' => 'ASC', 'datePublication' => 'DESC'])]
 #[Get()]
 #[GetCollection()]
-#[Post(security: "is_granted('ROLE_USER')")]
+#[Post(
+    security: "is_granted('ROLE_USER')",
+    processor: \App\State\ArticleProcessor::class
+)]
 #[Patch(security: "is_granted('edit', object)")]
 #[Delete(security: "is_granted('delete', object)")]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
