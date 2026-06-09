@@ -38,6 +38,11 @@ class ArticleVoter extends Voter
 
     private function canEditOrDelete(Article $article, User $user): bool
     {
+        // L'admin peut tout modifier et supprimer
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return true;
+        }
+
         // Seul le vendeur peut modifier ou supprimer son article
         return $article->getVendeur() === $user;
     }

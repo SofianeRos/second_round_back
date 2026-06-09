@@ -97,32 +97,32 @@ class Article
     /**
      * @var Collection<int, Photo>
      */
-    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'article')]
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'article', cascade: ['remove'], orphanRemoval: true)]
     #[Groups(['read'])]
     private Collection $photos;
 
     /**
      * @var Collection<int, Favori>
      */
-    #[ORM\OneToMany(targetEntity: Favori::class, mappedBy: 'article')]
+    #[ORM\OneToMany(targetEntity: Favori::class, mappedBy: 'article', cascade: ['remove'], orphanRemoval: true)]
     private Collection $favoris;
 
     /**
      * @var Collection<int, Messagerie>
      */
-    #[ORM\OneToMany(targetEntity: Messagerie::class, mappedBy: 'article')]
+    #[ORM\OneToMany(targetEntity: Messagerie::class, mappedBy: 'article', cascade: ['remove'], orphanRemoval: true)]
     private Collection $messageries;
 
     /**
      * @var Collection<int, Commande>
      */
-    #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'article')]
+    #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'article', cascade: ['remove'], orphanRemoval: true)]
     private Collection $commandes;
 
     /**
      * @var Collection<int, CommentaireArticle>
      */
-    #[ORM\OneToMany(targetEntity: CommentaireArticle::class, mappedBy: 'article')]
+    #[ORM\OneToMany(targetEntity: CommentaireArticle::class, mappedBy: 'article', cascade: ['remove'], orphanRemoval: true)]
     private Collection $commentaireArticles;
 
     public function __construct()
