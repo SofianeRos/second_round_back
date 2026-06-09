@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Put;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -35,6 +36,12 @@ use Symfony\Component\Serializer\Attribute\Groups;
     processor: \App\State\ArticleProcessor::class
 )]
 #[Patch(security: "is_granted('edit', object)")]
+#[Patch(
+    uriTemplate: '/articles/{id}/certifier',
+    security: "is_granted('ROLE_ADMIN')",
+    denormalizationContext: ['groups' => ['admin:write']],
+    name: 'certifier_article'
+)]
 #[Delete(security: "is_granted('delete', object)")]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -82,6 +89,10 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['read', 'write'])]
     private ?Statut $statut = null;
+
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    #[Groups(['read', 'admin:write'])]
+    private bool $certifie = false;
 
     /**
      * @var Collection<int, Photo>
@@ -232,6 +243,18 @@ class Article
     public function setStatut(?Statut $statut): static
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function isCertifie(): bool
+    {
+        return $this->certifie;
+    }
+
+    public function setCertifie(bool $certifie): static
+    {
+        $this->certifie = $certifie;
 
         return $this;
     }

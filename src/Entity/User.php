@@ -40,6 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['read'])]
     private array $roles = [];
 
     #[ORM\Column(length: 255)]
@@ -69,6 +70,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['read', 'write'])]
     private ?string $photoProfil = null;
+
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    #[Groups(['read'])]
+    private bool $banni = false;
 
     #[ORM\Column]
     #[Groups(['read'])]
@@ -487,6 +492,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhotoProfil(?string $photoProfil): static
     {
         $this->photoProfil = $photoProfil;
+
+        return $this;
+    }
+
+    public function isBanni(): bool
+    {
+        return $this->banni;
+    }
+
+    public function setBanni(bool $banni): static
+    {
+        $this->banni = $banni;
 
         return $this;
     }
