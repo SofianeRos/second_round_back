@@ -50,11 +50,6 @@ class PaymentController extends AbstractController
         }
 
         try {
-            // Si c'est une clé mock/placeholder par défaut, on évite l'appel à l'API Stripe
-            if (str_starts_with($stripeSecretKey, 'sk_test_51P2HwfJ7MvW14l52') || $stripeSecretKey === 'sk_test_***') {
-                throw new \Exception("Invalid API Key provided: mock key detected");
-            }
-
             Stripe::setApiKey($stripeSecretKey);
 
             $session = Session::create([

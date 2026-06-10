@@ -25,6 +25,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write']],
     paginationItemsPerPage: 20,
     paginationPartial: true,
+    paginationClientEnabled: true,
 )]
 #[ApiFilter(SearchFilter::class, properties: ['categorie' => 'exact', 'marque' => 'partial', 'description' => 'partial', 'statut.id' => 'exact', 'vendeur.id' => 'exact'])]
 #[ApiFilter(RangeFilter::class, properties: ['prix'])]
