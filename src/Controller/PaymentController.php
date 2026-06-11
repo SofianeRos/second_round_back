@@ -80,10 +80,10 @@ class PaymentController extends AbstractController
                 'url' => $session->url,
             ]);
         } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'Invalid API Key') || str_contains($e->getMessage(), 'mock key detected')) {
+            if (str_contains($e->getMessage(), 'Invalid API Key') || str_contains($e->getMessage(), 'mock key detected') || str_contains($e->getMessage(), 'No API key provided')) {
                 // URL de simulation de Stripe Checkout en local
                 $mockSessionId = 'mock_session_' . $article->getId() . '_' . $user->getId() . '_' . $prix . '_' . uniqid();
-                $mockUrl = 'http://localhost:5173/payment/success?session_id=' . $mockSessionId . '&article_id=' . $article->getId();
+                $mockUrl = 'http://localhost:5173/payment/mock-checkout?session_id=' . $mockSessionId . '&article_id=' . $article->getId() . '&prix=' . $prix;
                 return new JsonResponse([
                     'id' => $mockSessionId,
                     'url' => $mockUrl,
