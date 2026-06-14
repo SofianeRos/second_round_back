@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use App\Entity\Messagerie;
+use App\Entity\Photo;
 use App\Entity\Statut;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -410,6 +411,51 @@ class AppFixtures extends Fixture
         $a->setStatut($statuts['Vendu']);
         $manager->persist($a);
         $articles['casque_adidas_vendu'] = $a;
+
+        // ── CHAUSSURES ────────────────────────────────────
+        $a = new Article();
+        $a->setCategorie('Chaussures');
+        $a->setMarque('Adidas');
+        $a->setTaille('42');
+        $a->setEtat('Très bon état');
+        $a->setPrix('65.00');
+        $a->setDescription('Chaussures de boxe Adidas Box Hog 2, taille 42. Très légères et confortables. Portées une dizaine de fois en salle uniquement.');
+        $a->setDatePublication(new \DateTime('-4 days'));
+        $a->setVendeur($marie);
+        $a->setStatut($statuts['En vente']);
+        $manager->persist($a);
+        $articles['chaussures_adidas_marie'] = $a;
+
+        $a = new Article();
+        $a->setCategorie('Chaussures');
+        $a->setMarque('Nike');
+        $a->setTaille('44');
+        $a->setEtat('Bon état');
+        $a->setPrix('110.00');
+        $a->setDescription('Chaussures Nike Hyperko, taille 44. Excellente tenue de cheville. Quelques traces d\'usure normale.');
+        $a->setDatePublication(new \DateTime('-10 days'));
+        $a->setVendeur($jayson);
+        $a->setStatut($statuts['En vente']);
+        $manager->persist($a);
+        $articles['chaussures_nike_jayson'] = $a;
+
+        // Associer les images correspondantes aux articles
+        foreach ($articles as $article) {
+            $photo = new Photo();
+            $photo->setNomFichier(match ($article->getCategorie()) {
+                'Gants' => 'Gants.webp',
+                'Casques' => 'casque de boxe.webp',
+                'Sacs de frappe' => 'sac de frappe.webp',
+                'Shorts' => 'short de boxe.webp',
+                'Mitaines', 'Paos' => 'mitaine boxe.jpg',
+                'Chaussures' => 'chaussures boxe.jpg',
+                default => 'mitaine boxe.jpg', // Fallback pour Bandes et Cordes
+            });
+            $photo->setEstPrincipale(true);
+            $photo->setArticle($article);
+            $photo->setUpdatedAt(new \DateTime('-' . rand(2, 30) . ' days'));
+            $manager->persist($photo);
+        }
 
         // Flush pour avoir les IDs disponibles
         $manager->flush();
