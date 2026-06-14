@@ -30,7 +30,7 @@ class Evaluation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userAuteur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'evaluations')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $userCible = null;
 
